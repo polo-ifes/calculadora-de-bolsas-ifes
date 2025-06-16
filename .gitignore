@@ -1,0 +1,30 @@
+# Arquivos Python gerados
+__pycache__/
+*.py[cod]
+*.so
+.Python
+
+# Ambiente virtual
+venv/
+env/
+
+# Arquivos de IDE
+.vscode/
+.idea/
+
+# Arquivos de sistema
+.DS_Store
+*.swp
+*.swo
+
+# Logs e databases
+*.log
+*.sqlite3
+
+# Arquivos temporários
+*.tmp
+*~
+
+# Arquivos de configuração sensíveis
+.env
+secrets.json
