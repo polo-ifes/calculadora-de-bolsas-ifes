@@ -1,0 +1,290 @@
+[
+  {
+    "Modalidade": "Pesquisador - Doutor",
+    "Sigla": "PEQ-A",
+    "Valor": 1500.00,
+    "Teto": 3.0
+  },
+  {
+    "Modalidade": "Pesquisador - Mestre",
+    "Sigla": "PEQ-B",
+    "Valor": 1400.00,
+    "Teto": 3.0
+  },
+  {
+    "Modalidade": "Pesquisador - Especialista",
+    "Sigla": "PEQ-C",
+    "Valor": 1300.00,
+    "Teto": 3.0
+  },
+  {
+    "Modalidade": "Pesquisador - Graduado",
+    "Sigla": "PEQ-D",
+    "Valor": 1200.00,
+    "Teto": 3.0
+  },
+  {
+    "Modalidade": "Pesquisador - Técnico",
+    "Sigla": "PEQ-E",
+    "Valor": 1100.00,
+    "Teto": 3.0
+  },
+  {
+    "Modalidade": "Pesquisador - Qualificado/Experiente",
+    "Sigla": "PEQ-F",
+    "Valor": 1100.00,
+    "Teto": 3.0
+  },
+  {
+    "Modalidade": "Extensionista - Doutor",
+    "Sigla": "EXT-A",
+    "Valor": 1500.00,
+    "Teto": 3.0
+  },
+  {
+    "Modalidade": "Extensionista - Mestre",
+    "Sigla": "EXT-B",
+    "Valor": 1400.00,
+    "Teto": 3.0
+  },
+  {
+    "Modalidade": "Extensionista - Especialista",
+    "Sigla": "EXT-C",
+    "Valor": 1400.00,
+    "Teto": 3.0
+  },
+  {
+    "Modalidade": "Extensionista - Graduado",
+    "Sigla": "EXT-D",
+    "Valor": 1300.00,
+    "Teto": 3.0
+  },
+  {
+    "Modalidade": "Extensionista - Técnico",
+    "Sigla": "EXT-E",
+    "Valor": 1100.00,
+    "Teto": 3.0
+  },
+  {
+    "Modalidade": "Extensionista - Qualificado/Experiente",
+    "Sigla": "EXT-F",
+    "Valor": 1100.00,
+    "Teto": 3.0
+  },
+  {
+    "Modalidade": "Gestor de Programa - Doutor",
+    "Sigla": "GPO-A",
+    "Valor": 1500.00,
+    "Teto": 8.0
+  },
+  {
+    "Modalidade": "Gestor de Programa - Mestre",
+    "Sigla": "GPO-B",
+    "Valor": 1400.00,
+    "Teto": 7.0
+  },
+  {
+    "Modalidade": "Gestor de Programa - Especialista",
+    "Sigla": "GPO-C",
+    "Valor": 1300.00,
+    "Teto": 6.0
+  },
+  {
+    "Modalidade": "Gestor de Programa - Graduado",
+    "Sigla": "GPO-D",
+    "Valor": 1200.00,
+    "Teto": 5.0
+  },
+  {
+    "Modalidade": "Gestor de Projeto - Doutor",
+    "Sigla": "GPR-A",
+    "Valor": 1500.00,
+    "Teto": 8.0
+  },
+  {
+    "Modalidade": "Gestor de Projeto - Mestre",
+    "Sigla": "GPR-B",
+    "Valor": 1400.00,
+    "Teto": 7.0
+  },
+  {
+    "Modalidade": "Gestor de Projeto - Especialista",
+    "Sigla": "GPR-C",
+    "Valor": 1300.00,
+    "Teto": 6.0
+  },
+  {
+    "Modalidade": "Gestor de Projeto - Graduado",
+    "Sigla": "GPR-D",
+    "Valor": 1200.00,
+    "Teto": 5.0
+  },
+  {
+    "Modalidade": "Coordenador de Programa - Doutor",
+    "Sigla": "CPO-A",
+    "Valor": 1500.00,
+    "Teto": 8.0
+  },
+  {
+    "Modalidade": "Coordenador de Programa - Mestre",
+    "Sigla": "CPO-B",
+    "Valor": 1400.00,
+    "Teto": 7.0
+  },
+  {
+    "Modalidade": "Coordenador de Programa - Especialista",
+    "Sigla": "CPO-C",
+    "Valor": 1300.00,
+    "Teto": 6.0
+  },
+  {
+    "Modalidade": "Coordenador de Programa - Graduado",
+    "Sigla": "CPO-D",
+    "Valor": 1200.00,
+    "Teto": 5.0
+  },
+  {
+    "Modalidade": "Coordenador de Projeto - Doutor",
+    "Sigla": "CPR-A",
+    "Valor": 1500.00,
+    "Teto": 8.0
+  },
+  {
+    "Modalidade": "Coordenador de Projeto - Mestre",
+    "Sigla": "CPR-B",
+    "Valor": 1400.00,
+    "Teto": 7.0
+  },
+  {
+    "Modalidade": "Coordenador de Projeto - Especialista",
+    "Sigla": "CPR-C",
+    "Valor": 1300.00,
+    "Teto": 6.0
+  },
+  {
+    "Modalidade": "Coordenador de Projeto - Graduado",
+    "Sigla": "CPR-D",
+    "Valor": 1200.00,
+    "Teto": 5.0
+  },
+  {
+    "Modalidade": "Colaborador Externo - Doutor",
+    "Sigla": "CLE-D",
+    "Valor": 1500.00,
+    "Teto": 8.0
+  },
+  {
+    "Modalidade": "Colaborador Externo - Mestre",
+    "Sigla": "CLE-M",
+    "Valor": 1400.00,
+    "Teto": 7.0
+  },
+  {
+    "Modalidade": "Colaborador Externo - Especialista",
+    "Sigla": "CLE-E",
+    "Valor": 1300.00,
+    "Teto": 5.0
+  },
+  {
+    "Modalidade": "Colaborador Externo - Graduado",
+    "Sigla": "CLE-G",
+    "Valor": 1200.00,
+    "Teto": 4.0
+  },
+  {
+    "Modalidade": "Colaborador Externo - Técnico",
+    "Sigla": "CLE-T",
+    "Valor": 1100.00,
+    "Teto": 3.0
+  },
+  {
+    "Modalidade": "Colaborador Externo - Qualificado/Experiente",
+    "Sigla": "CLE-Q",
+    "Valor": 1100.00,
+    "Teto": 2.0
+  },
+  {
+    "Modalidade": "Estudante de Doutorado",
+    "Sigla": "EST-D",
+    "Valor": 3100.00,
+    "Teto": 3.0
+  },
+  {
+    "Modalidade": "Estudante de Mestrado",
+    "Sigla": "EST-M",
+    "Valor": 2100.00,
+    "Teto": 3.0
+  },
+  {
+    "Modalidade": "Estudante de Pós-graduação lato sensu",
+    "Sigla": "EST-LS",
+    "Valor": 2100.00,
+    "Teto": 2.0
+  },
+  {
+    "Modalidade": "Estudante de Aperfeiçoamento",
+    "Sigla": "EST-A",
+    "Valor": 2100.00,
+    "Teto": 2.0
+  },
+  {
+    "Modalidade": "Estudante de Graduação",
+    "Sigla": "EST-G",
+    "Valor": 700.00,
+    "Teto": 3.0
+  },
+  {
+    "Modalidade": "Estudante de Curso Técnico",
+    "Sigla": "EST-CT",
+    "Valor": 300.00,
+    "Teto": 3.0
+  },
+  {
+    "Modalidade": "Estudante de Especialização Técnica",
+    "Sigla": "EST-ET",
+    "Valor": 300.00,
+    "Teto": 3.0
+  },
+  {
+    "Modalidade": "Estudante de Curso FIC",
+    "Sigla": "EST-CF",
+    "Valor": 300.00,
+    "Teto": 3.0
+  },
+  {
+    "Modalidade": "Empreendedor Júnior",
+    "Sigla": "EMP-JR",
+    "Valor": 1100.00,
+    "Teto": 10.0
+  },
+  {
+    "Modalidade": "Empreendedor Sênior",
+    "Sigla": "EMP-SE",
+    "Valor": 3100.00,
+    "Teto": 5.0
+  },
+  {
+    "Modalidade": "Iniciação Tecnológica - Nível Superior",
+    "Sigla": "ITEC-S",
+    "Valor": 800.00,
+    "Teto": 3.0
+  },
+  {
+    "Modalidade": "Iniciação Tecnológica - Nível Médio",
+    "Sigla": "ITEC-M",
+    "Valor": 400.00,
+    "Teto": 3.0
+  },
+  {
+    "Modalidade": "Apoio Técnico - Nível Superior",
+    "Sigla": "APOIO-S",
+    "Valor": 1000.00,
+    "Teto": 3.0
+  },
+  {
+    "Modalidade": "Apoio Técnico - Nível Médio",
+    "Sigla": "APOIO-M",
+    "Valor": 600.00,
+    "Teto": 3.0
+  }
+]

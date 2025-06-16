@@ -1,0 +1,251 @@
+// Dados globais
+let equipe = [];
+let modalidades = [];
+
+// Elementos DOM
+const DOM = {
+    modalidade: null,
+    chs: null,
+    fatorX: null,
+    tabelaBolsas: document.getElementById('tabela-bolsas').querySelector('tbody'),
+    tabelaEquipe: document.getElementById('tabela-equipe').querySelector('tbody'),
+    versaoEquipe: document.getElementById('versao-equipe'),
+    totalEquipe: document.getElementById('total-equipe'),
+    fileInput: null
+};
+
+// Inicialização
+document.addEventListener('DOMContentLoaded', () => {
+    // Carrega os dados do CSV
+    carregarCSV();
+    
+    // Configura eventos
+    document.getElementById('adicionar').addEventListener('click', adicionarMembro);
+    document.getElementById('remover').addEventListener('click', removerMembro);
+    document.getElementById('limpar').addEventListener('click', limparEquipe);
+    document.getElementById('importar').addEventListener('click', () => {
+        // Cria um input file dinâmico
+        const fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.accept = '.json,.csv';
+        fileInput.addEventListener('change', handleFileImport);
+        fileInput.click();
+    });
+    document.getElementById('exportar').addEventListener('click', exportarEquipe);
+});
+
+// Carrega os dados do CSV
+async function carregarCSV() {
+    try {
+        // 1. Tenta carregar o CSV normalmente
+        let response = await fetch('tabela_bolsas_ifes.csv');
+        
+        // 2. Se falhar, tenta alternativas
+        if (!response.ok) {
+            console.log("Tentando caminho alternativo...");
+            response = await fetch('./tabela_bolsas_ifes.csv');
+        }
+        
+        if (!response.ok) throw new Error("Arquivo CSV não encontrado");
+        
+        const csv = await response.text();
+        console.log("Conteúdo do CSV:", csv.slice(0, 100) + "..."); // Log parcial
+        
+        const linhas = csv.split('\n')
+            .filter(line => line.trim() !== '')
+            .map(line => line.trim());
+        
+        // Verifica se o cabeçalho está correto
+        if (!linhas[0].includes("Modalidade,Sigla,Valor,Teto")) {
+            throw new Error("Cabeçalho do CSV inválido");
+        }
+        
+        modalidades = linhas.slice(1).map(linha => {
+            // Usa regex para lidar com vírgulas dentro de aspas
+            const cols = linha.match(/(".*?"|[^",\s]+)(?=\s*,|\s*$)/g);
+            return {
+                Modalidade: cols[0].replace(/"/g, '').trim(),
+                Sigla: cols[1].replace(/"/g, '').trim(),
+                Valor: parseFloat(cols[2]),
+                Teto: parseFloat(cols[3])
+            };
+        });
+
+        console.log("Modalidades carregadas:", modalidades.slice(0, 3)); // Log parcial
+        atualizarTabelaBolsas();
+    } catch (error) {
+        console.error("Erro detalhado:", error);
+        
+        // Fallback: dados hardcoded se o CSV falhar
+        modalidades = [
+            {
+                Modalidade: "Pesquisador - Doutor",
+                Sigla: "PEQ-A",
+                Valor: 1500.00,
+                Teto: 3.0
+            },
+            // ... (adicionar outras modalidades como fallback)
+        ];
+        
+        console.warn("Usando dados fallback");
+        atualizarTabelaBolsas();
+        
+        alert(`Erro ao carregar CSV: ${error.message}\n\nUtilizando dados de exemplo.`);
+    }
+}
+
+// Remove membro selecionado
+function removerMembro() {
+    const selecionados = document.querySelectorAll('#tabela-equipe tr.selected');
+    if (selecionados.length === 0) {
+        alert("Selecione um membro para remover!");
+        return;
+    }
+    
+    const indices = Array.from(selecionados).map(tr => 
+        Array.from(tr.parentNode.children).indexOf(tr)
+    );
+    
+    // Remove em ordem decrescente para não afetar os índices
+    indices.sort((a, b) => b - a).forEach(i => equipe.splice(i, 1));
+    
+    atualizarTabelaEquipe();
+}
+
+// Limpa toda a equipe
+function limparEquipe() {
+    if (equipe.length === 0 || !confirm("Deseja realmente limpar toda a equipe?")) return;
+    
+    equipe = [];
+    atualizarVersaoEquipe();
+    atualizarTabelaEquipe();
+}
+
+// Atualiza a tabela da equipe
+function atualizarTabelaEquipe() {
+    DOM.tabelaEquipe.innerHTML = equipe.map((membro, index) => `
+        <tr onclick="toggleSelection(this)">
+            <td>${membro.Modalidade}</td>
+            <td>${membro.CHS}</td>
+            <td>${membro.FatorX}</td>
+            <td>R$ ${membro.Valor.toFixed(2)}</td>
+            <td><button onclick="removerMembroPorIndice(event, ${index})">Remover</button></td>
+        </tr>
+    `).join('');
+    
+    // Atualiza o total
+    const total = equipe.reduce((sum, m) => sum + m.Valor, 0);
+    DOM.totalEquipe.textContent = `R$ ${total.toFixed(2)}`;
+}
+
+// Remove membro por índice
+function removerMembroPorIndice(event, index) {
+    event.stopPropagation();
+    equipe.splice(index, 1);
+    atualizarTabelaEquipe();
+}
+
+// Alterna seleção da linha
+function toggleSelection(row) {
+    row.classList.toggle('selected');
+}
+
+// Atualiza versão da equipe
+function atualizarVersaoEquipe(versao = null) {
+    DOM.versaoEquipe.textContent = versao 
+        ? `Equipe Versão: ${versao}`
+        : 'Equipe Versão: Nenhuma versão carregada';
+}
+
+// Importa equipe
+function handleFileImport(event) {
+    const file = event.target.files[0];
+    if (!file) return;
+    
+    const reader = new FileReader();
+    reader.onload = (e) => {
+        try {
+            let data;
+            if (file.name.endsWith('.json')) {
+                data = JSON.parse(e.target.result);
+            } else if (file.name.endsWith('.csv')) {
+                data = parseCSVEquipe(e.target.result);
+            } else {
+                throw new Error("Formato de arquivo não suportado");
+            }
+            
+            equipe = data.equipe || [];
+            atualizarVersaoEquipe(data.versao || extrairVersaoDoNome(file.name));
+            atualizarTabelaEquipe();
+            alert("Equipe importada com sucesso!");
+        } catch (error) {
+            alert(`Erro ao importar: ${error.message}`);
+        }
+    };
+    reader.readAsText(file);
+}
+
+// Exporta equipe
+function exportarEquipe() {
+    const versao = `v${new Date().toISOString().slice(0, 19).replace(/[-:T]/g, '')}`;
+    atualizarVersaoEquipe(versao);
+    
+    const data = {
+        versao,
+        equipe,
+        dataExportacao: new Date().toISOString(),
+        total: equipe.reduce((sum, m) => sum + m.Valor, 0)
+    };
+    
+    const dataStr = JSON.stringify(data, null, 2);
+    downloadFile(`equipe_bolsas_${versao}.json`, dataStr);
+}
+
+// Auxiliar para download
+function downloadFile(filename, content) {
+    const blob = new Blob([content], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+// Extrai versão do nome do arquivo
+function extrairVersaoDoNome(filename) {
+    const match = filename.match(/v(\d{8}-\d{4})/);
+    return match ? match[0] : 'N/A';
+}
+
+// Parse CSV para equipe
+function parseCSVEquipe(csv) {
+    const linhas = csv.split('\n').filter(line => line.trim() !== '');
+    const equipe = linhas.slice(1).map(linha => {
+        const [Modalidade, CHS, FatorX, Valor] = linha.split(',');
+        return {
+            Modalidade: Modalidade.trim(),
+            CHS: parseFloat(CHS),
+            FatorX: parseFloat(FatorX),
+            Valor: parseFloat(Valor)
+        };
+    });
+    
+    return {
+        versao: extrairVersaoDoNome('importado_' + new Date().toISOString().slice(0, 10)),
+        equipe
+    };
+}
+
+// Adiciona estilo para linhas selecionadas
+const style = document.createElement('style');
+style.textContent = `
+    #tabela-equipe tr.selected {
+        background-color: #d4e6f1 !important;
+    }
+    #tabela-equipe tr:hover {
+        background-color: #e8f4fc;
+        cursor: pointer;
+    }
+`;
+document.head.appendChild(style);
